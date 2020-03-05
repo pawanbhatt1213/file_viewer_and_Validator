@@ -1,0 +1,32 @@
+.matInputStyle{
+    width: 43%;
+    // border: 1px solid #e0e0e0;
+    padding: 10px;
+}
+.statusTable{
+    width: 100%;
+}
+.centerAlign{
+    text-align: center;
+}
+.statusTable tr td, .statusTable th{
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
+    padding: 7px;
+}
+.statusTable tr th {
+    background-color: #15467b;
+    color: white;
+}
+.sanity:hover{
+    cursor: pointer;
+}
+.sanity_success{
+    color: green;
+}
+.sanity_failed{
+    color: red;
+}
+table {
+    width: 100%;
+}

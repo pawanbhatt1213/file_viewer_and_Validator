@@ -1,0 +1,29 @@
+<div *ngIf="data.type == 'validate-file'">
+  <h1 mat-dialog-title style="float:left;">{{data.fileName}}</h1>
+  <button type="button" mat-icon-button style="float:right;" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+  </button>
+  <div class="spinner" *ngIf="!isResponse">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="isResponse">
+    <table class="table statusTable">
+
+      <tbody class="statusTable">
+        <tr>
+          <td class="sanity_success">Sanity check Passed</td>
+          <td class="sanity sanity_success" (click)="download('Success')">380</td>
+        </tr>
+        <tr>
+          <td class="sanity_failed">Sanity check failed</td>
+          <td class="sanity sanity_failed" (click)="download('Failed')">4</td>
+        </tr>
+        <tr>
+          <td class=""><h4>Total</h4></td>
+          <td class=""><h4>384</h4></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

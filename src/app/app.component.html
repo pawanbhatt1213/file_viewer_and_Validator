@@ -1,21 +1,66 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="'navigation'" [mode]="'side'"
+        [opened]="!(isHandset$ | async)">
+        <mat-toolbar>
+            <img style="margin: 0 auto;"
+                src="data:image/png;base64,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"
+                height="100%" title="https://commons.wikimedia.org/wiki/File:Iata_official_logo.png" width="80"
+                alt="Image result for iata logo" data-atf="1">
+        </mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item href="#" routerLink="/home" routerLinkActive="active">
+                <mat-icon>home</mat-icon>&nbsp;Home
+            </a>
+            <a mat-list-item href="#" routerLink="/onboardClient" routerLinkActive="active">
+                <mat-icon>perm_identity</mat-icon>&nbsp;OnBoard Clients
+            </a>
+            <a mat-list-item href="#" routerLink="/template" routerLinkActive="active">
+                <mat-icon>note_add</mat-icon>&nbsp;New Template
+            </a>
+            <a mat-list-item href="#" routerLink="/changes" routerLinkActive="active">
+                <mat-icon>monetization_on</mat-icon>&nbsp;New Changes
+            </a>
+            <a mat-list-item href="#" routerLink="/reports" routerLinkActive="active">
+                <mat-icon>multiline_chart</mat-icon>&nbsp;Reports
+            </a>
+            <a mat-list-item href="#" routerLink="/trends" routerLinkActive="active">
+                <mat-icon>trending_up</mat-icon>&nbsp;Trends
+            </a>
+            <a mat-list-item href="#" routerLink="/error" routerLinkActive="active">
+                <mat-icon>error_outline</mat-icon>&nbsp;Error
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                class="iataColor">
+                <mat-icon>arrow_left</mat-icon>
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            &nbsp;&nbsp;
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button class="iataColor">
+                <mat-icon>search</mat-icon>
+            </button>
+            <div fxFlex></div>
+            <button mat-icon-button class="iataColor">
+                <mat-icon>email</mat-icon>
+            </button>
+            <button mat-icon-button class="iataColor">
+                <mat-icon matBadge="22" matBadgePosition="above after" matBadgeColor="warn">notifications</mat-icon>
+            </button>
+            &nbsp;&nbsp;
+            <button mat-icon-button [matMenuTriggerFor]="userMenu" class="iataColor">
+                <mat-icon>account_circle</mat-icon>
+                <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 
-<router-outlet></router-outlet>
+<mat-menu #userMenu="matMenu">
+    <button mat-menu-item>Profile</button>
+    <button mat-menu-item>Logout</button>
+</mat-menu>

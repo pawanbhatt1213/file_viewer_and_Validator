@@ -1,0 +1,127 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showSpinner"></mat-progress-bar>
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      Client Onboard
+    </mat-card-title>
+    <mat-card-subtitle>
+      Follow the simple steps for client onboard
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <div fxFlex></div>
+            <ng-template matStepLabel>Upload File ( Excel sheets ) </ng-template>
+            <button mat-raised-button onclick="document.getElementById('fileToUpload').click()">Choose file</button>
+            <input id="fileToUpload" type="file" style="display:none;" required formControlName="firstCtrl" required
+              (change)="fileChanged($event.target.files, $event)"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+            <div fxFlex></div>
+          </form>
+          <div>
+            <div fxFlex></div><br>
+            {{selectedFile?.name}}
+            <div fxFlex></div>
+          </div>
+          <div>
+            <div fxFlex></div>
+            <button mat-button matStepperNext>Next</button>
+            <div fxFlex></div>
+          </div>
+        </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <div fxFlex></div>
+            <ng-template matStepLabel>Select Template</ng-template>
+            <mat-form-field class="matInputStyle">
+              <mat-label>Select Template</mat-label>
+              <mat-select formControlName="secondCtrl">
+                <mat-option *ngFor="let temp of templates" [value]="temp.name">
+                  {{temp.title}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field>
+              <input matInput placeholder="Address" formControlName="secondCtrl" required>
+            </mat-form-field> -->
+            <div fxFlex></div>
+          </form>
+
+          <div>
+            <div fxFlex></div>
+            <button mat-button matStepperPrevious (click)="enableUpload = false;">Back</button>
+            <button mat-button matStepperNext (click)="enableUpload = true;">Next</button>
+            <div fxFlex></div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Review & Upload</ng-template>
+          <div class="mat-elevation-z8" *ngIf="data.length > 0">
+            <table mat-table [dataSource]="dataSource">
+
+              <!-- Position Column -->
+              <ng-container [matColumnDef]="head" *ngFor="let head of header">
+                <th mat-header-cell *matHeaderCellDef> {{head}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[head]}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[3, 5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious (click)="enableUpload = false;">Back</button>
+            <button mat-button (click)="stepper.reset();enableUpload = false;">Reset</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+    <mat-card-actions>
+      <div fxFlex></div>
+      <button mat-raised-button color="primary" (click)="uploadFile()"
+        [disabled]="!firstFormGroup.valid || !secondFormGroup.valid || !enableUpload">Upload</button>
+    </mat-card-actions>
+  </mat-card>
+  <br>
+  <mat-card *ngIf="response.status">
+    <mat-card-title>
+      Recent Update
+    </mat-card-title>
+    <mat-card-subtitle>
+      Last client onboard status
+    </mat-card-subtitle>
+    <mat-card-content>
+      <table class="table statusTable">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3" class="centerAlign">{{response?.file.fileName}}</td>
+          </tr>
+          <tr>
+            <td>
+              <mat-chip-list>
+                Uploaded<mat-chip color="primary" selected>Success</mat-chip>
+              </mat-chip-list>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button mat-raised-button (click)="validateFile()">Validate</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
